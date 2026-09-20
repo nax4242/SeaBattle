@@ -16,6 +16,8 @@ public:
 
 	inline int row() const noexcept;
 	inline int col() const noexcept;
+	inline int max_row() const noexcept;
+	inline int max_col() const noexcept;
 
 	inline void row(int);
 	inline void col(int);
@@ -43,6 +45,12 @@ inline void Position::col(int col) {
 	}
 
 	_col = col;
+}
+inline int Position::max_row() const noexcept {
+	return _max_row;
+}
+inline int Position::max_col() const noexcept {
+	return _max_col;
 }
 
 Position parse(const std::string&);
