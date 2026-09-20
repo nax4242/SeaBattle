@@ -16,8 +16,8 @@ public:
 
 	inline int row() const noexcept;
 	inline int col() const noexcept;
-	inline int max_row() const noexcept;
-	inline int max_col() const noexcept;
+	inline static int max_row() noexcept;
+	inline static int max_col() noexcept;
 
 	inline void row(int);
 	inline void col(int);
@@ -46,10 +46,10 @@ inline void Position::col(int col) {
 
 	_col = col;
 }
-inline int Position::max_row() const noexcept {
+inline int Position::max_row() noexcept {
 	return _max_row;
 }
-inline int Position::max_col() const noexcept {
+inline int Position::max_col() noexcept {
 	return _max_col;
 }
 

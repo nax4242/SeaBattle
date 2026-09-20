@@ -20,7 +20,17 @@ public:
 	inline int col() const noexcept;
 
 	void rotate();
-
-private:
-	bool is_collision() const noexcept;
 };
+
+inline int Ship::size() const noexcept {
+	return _size;
+}
+inline Direction Ship::direction() const noexcept {
+	return _direction;
+}
+inline int Ship::row() const noexcept {
+	return _coord.row();
+}
+inline int Ship::col() const noexcept {
+	return _coord.col();
+}
