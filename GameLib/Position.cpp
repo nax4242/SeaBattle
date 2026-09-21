@@ -1,11 +1,21 @@
 #include "Position.h"
 
+Position::Position() {
+	std::random_device random;
+	std::mt19937 gen(random());
+	std::uniform_int_distribution<int> row_dist(1, _max_row);
+	std::uniform_int_distribution<int> col_dist(1, _max_col);
+
+	_row = row_dist(gen);
+	_col = col_dist(gen);
+}
+
 Position::Position(int row, int col) {
-	if (row < 1 || row > _max_row) {
+	if (is_collision(row)) {
 		throw std::logic_error("Invalid input: incorrect position");
 	}
 
-	if (col < 1 || col > _max_col) {
+	if (is_collision(static_cast<char>(col + 'A' - 1))) {
 		throw std::logic_error("Invalid input: incorrect position");
 	}
 
@@ -13,52 +23,55 @@ Position::Position(int row, int col) {
 	_col = col;
 }
 
-Position::Position(const Position& other) : _row(other._row), _col(other._col) {}
+Position::Position(int row, char col) {
+	if (is_collision(row)) {
+		throw std::logic_error("Invalid input: incorrect position");
+	}
 
-Position::Position(std::string str) : Position(parse(str)) {}
+	if (is_collision(col)) {
+		throw std::logic_error("Invalid input: incorrect position");
+	}
 
-std::string to_string(const Position& other) noexcept {
-	return "(" + std::to_string(other._row) + ", " + std::to_string(other._col) + ")";
+	_row = row;
+	_col = std::toupper(col) - 'A' + 1;
 }
 
-Position parse(const std::string& str) {
-	int start_index = 1, length = 0;
-	int values[2];
+Position::Position(const Position& other) : _row(other._row), _col(other._col) {}
 
-	if (str[0] != '(') {
+Position::Position(std::string str) {
+	parse(str, *this);
+}
+
+void parse(const std::string& str, Position& pos) {
+	size_t digits_end = 0;
+	size_t digits_start = digits_end;
+
+	if (digits_end < str.size() && str[digits_end] == '-') {
+		digits_end++;
+	}
+
+	if (digits_end >= str.size() || !std::isdigit(str[digits_end])) {
+		throw std::logic_error("Invalid input: incorrect string format");
+	}
+	while (digits_end < str.size() && std::isdigit(str[digits_end])) {
+		digits_end++;
+	}
+
+	int row_value = std::stoi(str.substr(digits_start, digits_end - digits_start));
+
+	if (digits_end < str.size() && str[digits_end] == ' ') {
+		digits_end++;
+	}
+
+	if (digits_end >= str.size() || !std::isalpha(str[digits_end])) {
+		throw std::logic_error("Invalid input: incorrect string format");
+	}
+	char col_char = str[digits_end];
+	digits_end++;
+
+	if (digits_end != str.size()) {
 		throw std::logic_error("Invalid input: incorrect string format");
 	}
 
-	for (int count = 0; count < 2; count++) {
-		if (str[start_index] == '-') {
-			length++;
-		}
-
-		if (!std::isdigit(static_cast<int>(str[start_index + length]))) {
-			throw std::logic_error("Invalid input: incorrect string format");
-		}
-
-		while (start_index + length < str.size() && std::isdigit(static_cast<int>(str[start_index + length]))) {
-			length++;
-		}
-
-		values[count] = std::stoi(str.substr(start_index, length));
-		start_index += length;
-		length = 0;
-
-		if (count == 0) {
-			if (str[start_index++] != ',') throw std::logic_error("Invalid input: incorrect string format");
-			if (str[start_index++] != ' ') throw std::logic_error("Invalid input: incorrect string format");
-		}
-	}
-
-	if (start_index >= str.size() || str[start_index] != ')') {
-		throw std::logic_error("Invalid input: incorrect string format");
-	}
-
-	if (start_index + 1 != str.size()) {
-		throw std::logic_error("Invalid input: incorrect string format");
-	}
-
-	return Position(values[0], values[1]);
+	pos = Position(row_value, col_char);
 }

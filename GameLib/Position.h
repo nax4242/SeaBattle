@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <stdexcept>
+#include <random>
 
 class Position {
 	static const int _max_col = 10;
@@ -18,18 +19,18 @@ public:
 
 	inline int row() const noexcept;
 	inline int col() const noexcept;
-	inline int char_col() const noexcept;
-
-	inline static int max_row() noexcept;
-	inline static int max_col() noexcept;
+	inline char char_col() const noexcept;
 
 	inline void row(int);
 	inline void col(int);
 	inline void col(char);
 
-	friend void parse(const std::string&, Position&);
-	
+	inline static int max_row() noexcept;
+	inline static int max_col() noexcept;
+
 private:
+	friend void parse(const std::string&, Position&);
+
 	inline bool is_collision(int) const noexcept;
 	inline bool is_collision(char) const noexcept;
 };
@@ -40,20 +41,32 @@ inline int Position::row() const noexcept {
 inline int Position::col() const noexcept {
 	return _col;
 }
+inline char Position::char_col() const noexcept {
+	return static_cast<char>(_col + 'A' - 1);
+}
+
 inline void Position::row(int row) {
-	if (row < 1 || row > _max_row) {
+	if (is_collision(row)) {
 		throw std::logic_error("Invalid input: incorrect position");
 	}
 
 	_row = row;
 }
 inline void Position::col(int col) {
-	if (col < 1 || col > _max_col) {
+	if (is_collision(static_cast<char>(col + 'A' - 1))) {
 		throw std::logic_error("Invalid input: incorrect position");
 	}
 
 	_col = col;
 }
+inline void Position::col(char col) {
+	if (is_collision(col)) {
+		throw std::logic_error("Invalid input: incorrect position");
+	}
+
+	_col = std::toupper(col) - 'A' + 1;
+}
+
 inline int Position::max_row() noexcept {
 	return _max_row;
 }
@@ -61,4 +74,13 @@ inline int Position::max_col() noexcept {
 	return _max_col;
 }
 
-Position parse(const std::string&);
+inline bool Position::is_collision(int row) const noexcept {
+	return row < 1 || row > Position::max_row();
+}
+inline bool Position::is_collision(char col) const noexcept {
+	col = std::toupper(col) - 'A' + 1;
+	return col < 1 || col > _max_col;
+	
+}
+
+void parse(const std::string&, Position&);

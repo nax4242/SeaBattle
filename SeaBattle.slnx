@@ -3,7 +3,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="GameLib/GameLib.vcxproj" />
-  <Project Path="GoogleTests/GoogleTests.vcxproj" />
-  <Project Path="SeaBattle/SeaBattle.vcxproj" />
+  <Project Path="GameLib/GameLib.vcxproj" Id="35cd4410-5308-46e1-9323-2201fa48d0f0" />
+  <Project Path="GoogleTests/GoogleTests.vcxproj" Id="2561525e-9e84-44e4-b36d-8a51b432f6a1" />
+  <Project Path="SeaBattle/SeaBattle.vcxproj" Id="03b949ce-8576-4a8c-af62-70d696306b9f" />
 </Solution>
