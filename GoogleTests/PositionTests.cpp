@@ -251,3 +251,27 @@ TEST(PositionTests, ParseOutOfRangeColThrowsPositionErrorTest) {
 TEST(PositionTests, ParseZeroRowThrowsPositionErrorTest) {
     EXPECT_THROW(Position(std::string("0A")), std::logic_error);
 }
+
+TEST(PositionTests, IsCollisionIntValidTest) {
+    EXPECT_FALSE(is_collision(1));
+    EXPECT_FALSE(is_collision(5));
+    EXPECT_FALSE(is_collision(10));
+}
+
+TEST(PositionTests, IsCollisionIntInvalidTest) {
+    EXPECT_TRUE(is_collision(0));
+    EXPECT_TRUE(is_collision(-3));
+    EXPECT_TRUE(is_collision(11));
+}
+
+TEST(PositionTests, IsCollisionCharValidTest) {
+    EXPECT_FALSE(is_collision('A'));
+    EXPECT_FALSE(is_collision('J'));
+    EXPECT_FALSE(is_collision('e'));
+}
+
+TEST(PositionTests, IsCollisionCharInvalidTest) {
+    EXPECT_TRUE(is_collision('K'));
+    EXPECT_TRUE(is_collision('Z'));
+    EXPECT_TRUE(is_collision('1'));
+}

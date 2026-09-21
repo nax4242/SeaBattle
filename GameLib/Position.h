@@ -30,10 +30,17 @@ public:
 
 private:
 	friend void parse(const std::string&, Position&);
-
-	inline bool is_collision(int) const noexcept;
-	inline bool is_collision(char) const noexcept;
+	friend bool is_collision(int) noexcept;
+	friend bool is_collision(char) noexcept;
 };
+
+inline bool is_collision(int row) noexcept {
+	return row < 1 || row > Position::_max_row;
+}
+inline bool is_collision(char col) noexcept {
+	col = std::toupper(col) - 'A' + 1;
+	return col < 1 || col > Position::_max_col;
+}
 
 inline int Position::row() const noexcept {
 	return _row;
@@ -72,15 +79,6 @@ inline int Position::max_row() noexcept {
 }
 inline int Position::max_col() noexcept {
 	return _max_col;
-}
-
-inline bool Position::is_collision(int row) const noexcept {
-	return row < 1 || row > Position::max_row();
-}
-inline bool Position::is_collision(char col) const noexcept {
-	col = std::toupper(col) - 'A' + 1;
-	return col < 1 || col > _max_col;
-	
 }
 
 void parse(const std::string&, Position&);
