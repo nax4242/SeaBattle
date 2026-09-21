@@ -10,20 +10,28 @@ class Position {
 	int _col;
 
 public:
-	Position(int = 1, int = 1);
+	Position();
+	Position(int, int);
+	Position(int, char);
 	Position(const Position&);
 	Position(std::string);
 
 	inline int row() const noexcept;
 	inline int col() const noexcept;
+	inline int char_col() const noexcept;
+
 	inline static int max_row() noexcept;
 	inline static int max_col() noexcept;
 
 	inline void row(int);
 	inline void col(int);
+	inline void col(char);
 
-	friend std::string to_string(const Position&) noexcept;
-	friend Position parse(const std::string&);
+	friend void parse(const std::string&, Position&);
+	
+private:
+	inline bool is_collision(int) const noexcept;
+	inline bool is_collision(char) const noexcept;
 };
 
 inline int Position::row() const noexcept {
