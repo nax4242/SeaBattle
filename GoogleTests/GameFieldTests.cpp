@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "GameField.h"
+#include "flags.h"
+
+#ifdef GAMEFIELD_TESTS
 
 TEST(GameFieldTests, DefaultConstructorCreatesEmptyFieldTest) {
     GameField field;
@@ -310,3 +313,4 @@ TEST(GameFieldTests, LowerCaseColumnIsAcceptedTest) {
     EXPECT_EQ(field.set(4, 'd'), BoatDestroyed);
 }
 
+#endif

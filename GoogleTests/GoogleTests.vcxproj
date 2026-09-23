@@ -97,10 +97,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="flags.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFieldTests.cpp" />
+    <ClCompile Include="GameTests.cpp" />
     <ClCompile Include="PlayerTests.cpp" />
     <ClCompile Include="PositionTests.cpp" />
     <ClCompile Include="ShipTests.cpp" />

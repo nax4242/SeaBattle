@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "Player.h"
+#include "flags.h"
+
+#ifdef PLAYER_TESTS
 
 TEST(PlayerTests, DefaultConstructorCreatesPlayerNotReadyTest) {
     Player player;
@@ -334,3 +337,5 @@ TEST(PlayerTests, ShowFieldAfterActionDisplaysMissTest) {
 
     EXPECT_NE(output.find("5 | | | | |.| | | | | |"), std::string::npos);
 }
+
+#endif

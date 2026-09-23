@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "Ship.h"
+#include "flags.h"
+
+#ifdef SHIP_TESTS
 
 TEST(ShipTests, InitConstructorTest) {
     Ship s(3, Position(4, 3), Horizontal);
@@ -359,3 +362,5 @@ TEST(ShipTests, ParseDoesNotFitFieldThrowsShipErrorTest) {
         EXPECT_STREQ(e.what(), "Invalid input: incorrect ship");
     }
 }
+
+#endif

@@ -19,5 +19,9 @@ private:
     State computer_move();
 
     inline bool is_end() const noexcept;
-    void show_game_window() const;
+    void show_game_window(bool = false) const;
 };
+
+inline bool Game::is_end() const noexcept {
+    return _user.check_lose() || _computer.check_lose();
+}

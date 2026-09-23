@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "Position.h"
+#include "flags.h"
+
+#ifdef POSITION_TESTS
 
 TEST(PositionTests, DefaultConstructorAlwaysValidTest) {
     for (int i = 0; i < 1000; ++i) {
@@ -275,3 +278,5 @@ TEST(PositionTests, IsCollisionCharInvalidTest) {
     EXPECT_TRUE(is_collision('Z'));
     EXPECT_TRUE(is_collision('1'));
 }
+
+#endif
