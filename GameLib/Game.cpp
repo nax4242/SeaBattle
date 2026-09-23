@@ -102,6 +102,11 @@ void Game::start() {
     std::string user_ships;
     std::string computer_ships;
 
+    std::cout << "Enter your ships using the format `1 h 4 c`, \
+where `1` is the size (1–4), `h` (or `v`) is the ship's orientation (horizontal or vertical), \
+and `4 c` represents the coordinates on the grid (1...10 and a...j). \
+You need to place: 4 ships of length 1, 3 ships of length 2, 2 ships of length 3, and 1 ship of length 4.\n";
+
     while (std::getline(std::cin, input) && !input.empty()) {
         if (!user_ships.empty()) {
             user_ships += '\n';
@@ -111,6 +116,11 @@ void Game::start() {
     }
 
     user_init(user_ships);
+
+    std::cout << "Enter computer ships using the format `1 h 4 c`, \
+where `1` is the size (1–4), `h` (or `v`) is the ship's orientation (horizontal or vertical), \
+and `4 c` represents the coordinates on the grid (1–10 and a–j). \
+You need to place: 4 ships of length 1, 3 ships of length 2, 2 ships of length 3, and 1 ship of length 4.\n";
 
     while (std::getline(std::cin, input) && !input.empty()) {
         if (!computer_ships.empty()) {
