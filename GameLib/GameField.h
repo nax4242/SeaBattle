@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include "Ship.h"
+
+enum State { Missed, BoatDestroyed, DestroyersDestroyed, CruisersDestroyed, BattleshipDestroyed, Hit };
 
 class GameField {
 	char** _field;
@@ -7,14 +10,18 @@ class GameField {
 	const int _m;
 
 public:
-	GameField(char** = nullptr, int = 10, int = 10);
-	GameField(int, int);
-	GameField(const GameField&);
-
+	GameField();
 	~GameField();
 
-	inline void set(int, int);
-	inline char get(int, int) const;
+	void set(const Ship&);
+	State set(int, char);
 
-	friend std::string to_string(GameField) noexcept;
+	friend std::string to_string(const GameField&, bool) noexcept;
+
+private:
+	int check_destroy(int, int) const noexcept;
+	friend bool is_collision(const GameField&, const Ship&) noexcept;
 };
+
+std::string to_string(const GameField&, bool = false) noexcept;
+bool is_collision(const GameField&, const Ship&) noexcept;
