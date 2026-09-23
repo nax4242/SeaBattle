@@ -5,7 +5,7 @@
 
 class Position {
 	static constexpr int _max_col = 10;
-	static const int _max_row = 10;
+	static constexpr int _max_row = 10;
 
 	int _row;
 	int _col;
