@@ -14,7 +14,7 @@ class Ship {
 public:
 	Ship(int, Position, Direction);
 	Ship(int, char, int, char);
-	Ship(std::string str);
+	Ship(const std::string&);
 
 	Ship() = delete;
 	Ship(const Ship&) = delete;
@@ -33,9 +33,6 @@ public:
 	inline void direction(char direction);
 	inline void position(Position position);
 
-	void rotate();
-
-private:
 	friend void parse(const std::string&, Ship&);
 	friend bool is_collision(int, Position, Direction) noexcept;
 };

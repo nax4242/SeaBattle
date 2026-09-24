@@ -6,7 +6,7 @@
 
 Game::Game() : _user(), _computer() {}
 
-void Game::user_init(std::string input) {
+void Game::user_init(const std::string& input) {
     std::istringstream input_stream(input);
     std::string line;
 
@@ -32,7 +32,7 @@ void Game::user_init(std::string input) {
     }
 }
 
-void Game::computer_init(std::string input) {
+void Game::computer_init(const std::string& input) {
     std::istringstream input_stream(input);
     std::string line;
 
@@ -58,7 +58,7 @@ void Game::computer_init(std::string input) {
     }
 }
 
-State Game::user_move(std::string input) {
+State Game::user_move(const std::string& input) {
     Position position(1, 1);
 
     try {
@@ -88,7 +88,7 @@ State Game::computer_move() {
     }
 }
 
-void Game::show_game_window(bool show_computer_ships) const {
+void Game::show_game_window(bool show_computer_ships) const noexcept {
     std::cout << "=== COMPUTER GAME FIELD ===\n\n";
     _computer.show_field(!show_computer_ships);
 

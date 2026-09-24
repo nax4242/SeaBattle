@@ -60,8 +60,7 @@ namespace {
 }
 
 TEST(GameTests, DefaultConstructorTest) {
-    Game game;
-    SUCCEED();
+    EXPECT_NO_THROW(Game());
 }
 
 TEST(GameTests, StartShowsGameWindowAfterSuccessfulInitializationTest) {

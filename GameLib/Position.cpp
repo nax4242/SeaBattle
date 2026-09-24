@@ -38,7 +38,7 @@ Position::Position(int row, char col) {
 
 Position::Position(const Position& other) : _row(other._row), _col(other._col) {}
 
-Position::Position(std::string str) {
+Position::Position(const std::string& str) {
 	parse(str, *this);
 }
 

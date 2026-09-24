@@ -13,7 +13,7 @@ public:
     void set_ship(const Ship&);
     State set_action(int, char);
 
-    void show_field(bool = false) const;
+    void show_field(bool = false) const noexcept;
 
     inline bool check_lose() const noexcept;
     inline bool check_ready() const noexcept;

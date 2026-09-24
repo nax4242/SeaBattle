@@ -15,7 +15,7 @@ public:
 	Position(int, int);
 	Position(int, char);
 	Position(const Position&);
-	Position(std::string);
+	Position(const std::string&);
 
 	inline int row() const noexcept;
 	inline int col() const noexcept;
@@ -28,7 +28,6 @@ public:
 	inline static int max_row() noexcept;
 	inline static int max_col() noexcept;
 
-private:
 	friend void parse(const std::string&, Position&);
 	friend bool is_collision(int) noexcept;
 	friend bool is_collision(char) noexcept;

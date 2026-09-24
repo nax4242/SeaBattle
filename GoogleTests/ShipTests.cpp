@@ -17,10 +17,6 @@ TEST(ShipTests, InitConstructorVerticalTest) {
     EXPECT_EQ(s.direction(), Vertical);
 }
 
-TEST(ShipTests, PartialConstructorNoLongerCompilesNote) {
-    SUCCEED();
-}
-
 TEST(ShipTests, CharConstructorMatchesExampleFromTaskTest) {
     Ship s(3, 'H', 4, 'C');
     EXPECT_EQ(s.size(), 3);
@@ -242,31 +238,6 @@ TEST(ShipTests, PositionSetterThrowWhenDoesNotFitTest) {
     Ship s(4, Position(1, 1), Horizontal);
     EXPECT_THROW(s.position(Position(1, 9)), std::logic_error);
     EXPECT_EQ(s.col(), 1);
-}
-
-TEST(ShipTests, RotateHorizontalToVerticalTest) {
-    Ship s(2, Position(1, 1), Horizontal);
-    s.rotate();
-    EXPECT_EQ(s.direction(), Vertical);
-}
-
-TEST(ShipTests, RotateVerticalToHorizontalTest) {
-    Ship s(2, Position(1, 1), Vertical);
-    s.rotate();
-    EXPECT_EQ(s.direction(), Horizontal);
-}
-
-TEST(ShipTests, RotateTwiceReturnsToOriginalTest) {
-    Ship s(2, Position(1, 1), Horizontal);
-    s.rotate();
-    s.rotate();
-    EXPECT_EQ(s.direction(), Horizontal);
-}
-
-TEST(ShipTests, RotateThrowsWhenDoesNotFitTest) {
-    Ship s(4, Position(9, 1), Horizontal);
-    EXPECT_THROW(s.rotate(), std::logic_error);
-    EXPECT_EQ(s.direction(), Horizontal);
 }
 
 TEST(ShipTests, ParseExampleOneTest) {

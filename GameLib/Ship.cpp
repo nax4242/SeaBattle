@@ -43,12 +43,8 @@ Ship::Ship(int size, char direction, int row, char col) {
 	_direction = dir;
 }
 
-Ship::Ship(std::string str) {
+Ship::Ship(const std::string& str) {
 	parse(str, *this);
-}
-
-void Ship::rotate() {
-	direction(_direction == Horizontal ? Vertical : Horizontal);
 }
 
 void parse(const std::string& str, Ship& ship) {

@@ -5,12 +5,10 @@ GameField::GameField() : _n(Position::max_row()), _m(Position::max_col()) {
 
 	for (int i = 0; i < _n; i++) {
 		_field[i] = new char[_m];
-	}
 
-	for (int i = 0; i < _n; i++) {
-		for (int j = 0; j < _m; j++) {
-			_field[i][j] = ' ';
-		}
+        for (int j = 0; j < _m; j++) {
+            _field[i][j] = ' ';
+        }
 	}
 }
 
